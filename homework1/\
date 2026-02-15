@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main() {
+	int arr[] = {4, 3, 2, 1, 0};
+	for (int i; i < 4; i++) {
+		printf("%d,\t", *arr + i);
+	}
+
+
+	return 0;
+
+}

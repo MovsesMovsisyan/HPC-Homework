@@ -18,6 +18,10 @@ pthread_t thread[N];
 void* thread_function(void* args) {
 	int* arr = (int *) args;
 	int* partial_sum = malloc(sizeof(int));
+	if(partial_sum == NULL) {
+		fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 	for(int i = 0; i < SIZE / N; i++)
 		*partial_sum += *(arr + i);
 	return (void*) partial_sum;
@@ -26,6 +30,10 @@ void* thread_function(void* args) {
 int main() {
 	srand(42);
 	int *arr = malloc(sizeof(int) * SIZE);
+	if (arr == NULL) {
+		fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 	for (int i = 0; i < SIZE; i++) 
 		arr[i] = rand() % 10 + 1;
 

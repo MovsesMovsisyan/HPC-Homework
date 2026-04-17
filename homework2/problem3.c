@@ -37,6 +37,10 @@ void* thread_function(void* args) {
 int main() {
 	srand(42);
 	int *arr = malloc(sizeof(int) * SIZE);
+	if (arr == NULL) {
+		fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 	for (int i = 0; i < SIZE; i++) 
 		arr[i] = rand();
 

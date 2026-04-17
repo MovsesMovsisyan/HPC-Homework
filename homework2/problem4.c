@@ -43,6 +43,10 @@ pthread_t thread[N_THREADS];
 void* thread_function(void* arg) {
 	int* start = (int*) arg;
 	int* count = malloc(sizeof(int));
+	if (count == NULL) {
+		fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 	*count = 0;
 	*count = primes_seq(*start, *start + N / N_THREADS - 1);
 	return (void*) count;

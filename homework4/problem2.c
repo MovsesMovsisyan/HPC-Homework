@@ -123,8 +123,20 @@ int main()
     char *buffer_original = create_buffer();
 
     char *buffer_mt = malloc(SIZE);
+    if (buffer_mt == NULL) {
+	    	fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
     char *buffer_simd = malloc(SIZE);
+    if (buffer_simd == NULL) {
+	    	fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
     char *buffer_simd_mt = malloc(SIZE);
+    if (buffer_simd_mt == NULL) {
+	    	fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 
     memcpy(buffer_mt, buffer_original, SIZE);
     memcpy(buffer_simd, buffer_original, SIZE);
@@ -183,6 +195,10 @@ int main()
     for (int i = 0; i < N; i++)
     {
         simd_args *args = malloc(sizeof(simd_args));
+	if (args == NULL) {
+		fprintf(stderr, "Memory allocation failed!\n");
+        	exit(1);
+    	}
 
         args->buf = (unsigned char *)(buffer_simd_mt + i * (SIZE / N));
         args->n = SIZE / N;
@@ -191,6 +207,7 @@ int main()
                        NULL,
                        simd_thread_function,
                        args);
+	free(args)
     }
 
     if (SIZE % N != 0)
